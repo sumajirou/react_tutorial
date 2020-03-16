@@ -101,9 +101,15 @@ class Game extends React.Component {
         </li>
       );
     });
-    const status = winner
-      ? `Winner: ${winner}`
-      : `Next player: ${this.state.next}`;
+
+    let status;
+    if (winner === "Draw") {
+      status = "Draw.";
+    } else if (winner) {
+      status = `Winner: ${winner}`;
+    } else {
+      status = `Next player: ${this.state.next}`;
+    }
 
     return (
       <div className="game">
@@ -145,6 +151,10 @@ function calculateWinner(squares) {
     if (squares[a] && squares[a] === squares[b] && squares[a] === squares[c]) {
       return { winner: squares[a], line };
     }
+  }
+  // 6. When no one wins, display a message about the result being a draw.
+  if (squares.every(square => square)) {
+    return { winner: "Draw", line: [] };
   }
   return { winner: null, line: [] };
 }
