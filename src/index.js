@@ -20,24 +20,16 @@ class Board extends React.Component {
     );
   }
 
+  // 3. Rewrite Board to use two loops to make the squares instead of hardcoding them.
+  // I feel... it's harder to understand.
   render() {
     return (
       <div>
-        <div className="board-row">
-          {this.renderSquare(0)}
-          {this.renderSquare(1)}
-          {this.renderSquare(2)}
-        </div>
-        <div className="board-row">
-          {this.renderSquare(3)}
-          {this.renderSquare(4)}
-          {this.renderSquare(5)}
-        </div>
-        <div className="board-row">
-          {this.renderSquare(6)}
-          {this.renderSquare(7)}
-          {this.renderSquare(8)}
-        </div>
+        {[0, 1, 2].map(row => (
+          <div className="board-row">
+            {[0, 1, 2].map(col => this.renderSquare(3 * row + col))}
+          </div>
+        ))}
       </div>
     );
   }
