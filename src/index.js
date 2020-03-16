@@ -41,7 +41,8 @@ class Game extends React.Component {
     this.state = {
       history: [{ squares: Array(9).fill(null), pos: null }],
       stepNumber: 0,
-      next: "X"
+      next: "X",
+      reverse: false
     };
   }
 
@@ -69,6 +70,12 @@ class Game extends React.Component {
     this.setState({
       stepNumber: step,
       next: step % 2 === 0 ? "X" : "O"
+    });
+  }
+  // 4. Add a toggle button that lets you sort the moves in either ascending or descending order.
+  reverseList() {
+    this.setState({
+      reverse: !this.state.reverse
     });
   }
 
@@ -104,7 +111,8 @@ class Game extends React.Component {
         </div>
         <div className="game-info">
           <div>{status}</div>
-          <ol>{moves}</ol>
+          <button onClick={() => this.reverseList()}>Reverse List</button>
+          <ol>{this.state.reverse ? moves.slice().reverse() : moves}</ol>
         </div>
       </div>
     );
